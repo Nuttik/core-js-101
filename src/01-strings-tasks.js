@@ -1,3 +1,8 @@
+/* eslint-disable no-useless-concat */
+/* eslint-disable no-plusplus */
+/* eslint-disable operator-assignment */
+/* eslint-disable eqeqeq */
+/* eslint-disable no-unused-vars */
 /* eslint-disable prefer-const */
 /* eslint-disable prefer-template */
 /* *******************************************************************************************
@@ -126,8 +131,8 @@ function repeatString(value, count) {
  *   'I like legends', 'end' => 'I like legs',
  *   'ABABAB','BA' => 'ABAB'
  */
-function removeFirstOccurrences(/* str, value */) {
-  throw new Error('Not implemented');
+function removeFirstOccurrences(str, value) {
+  return str.replace(value, '');
 }
 
 /**
@@ -141,8 +146,8 @@ function removeFirstOccurrences(/* str, value */) {
  *   '<span>' => 'span'
  *   '<a>' => 'a'
  */
-function unbracketTag(/* str */) {
-  throw new Error('Not implemented');
+function unbracketTag(str) {
+  return str.replace('<', '').replace('>', '');
 }
 
 /**
@@ -155,8 +160,8 @@ function unbracketTag(/* str */) {
  *   'Thunderstruck' => 'THUNDERSTRUCK'
  *  'abcdefghijklmnopqrstuvwxyz' => 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
  */
-function convertToUpperCase(/* str */) {
-  throw new Error('Not implemented');
+function convertToUpperCase(str) {
+  return str.toUpperCase();
 }
 
 /**
@@ -174,8 +179,8 @@ function convertToUpperCase(/* str */) {
  *   ],
  *   'info@gmail.com' => ['info@gmail.com']
  */
-function extractEmails(/* str */) {
-  throw new Error('Not implemented');
+function extractEmails(str) {
+  return str.split(';');
 }
 
 /**
@@ -201,8 +206,40 @@ function extractEmails(/* str */) {
  *             '└──────────┘\n'
  *
  */
-function getRectangleString(/* width, height */) {
-  throw new Error('Not implemented');
+function getRectangleString(width, height) {
+  let result = '';
+  let str = '';
+  for (let i = 0; i < height; i++) {
+    for (let j = 0; j < width; j++) {
+      if (i == 0) {
+        if (j == 0) {
+          str = '┌';
+        } else if (j > 0 && j < width - 1) {
+          str = str + '─';
+        } else if (j == width - 1) {
+          str = str + '┐\n';
+        }
+      } else if (i > 0 && i < height - 1) {
+        if (j == 0) {
+          str = '│';
+        } else if (j == width - 1) {
+          str = str + '│\n';
+        } else {
+          str = str + ' ';
+        }
+      } else if (i == height - 1) {
+        if (j == 0) {
+          str = '└';
+        } else if (j > 0 && j < width - 1) {
+          str = str + '─';
+        } else if (j == width - 1) {
+          str = str + '┘\n';
+        }
+      }
+    }
+    result = result + str;
+  }
+  return result;
 }
 
 /**
