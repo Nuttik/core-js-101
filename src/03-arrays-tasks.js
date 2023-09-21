@@ -1,3 +1,5 @@
+/* eslint-disable operator-linebreak */
+/* eslint-disable prefer-template */
 /* eslint-disable arrow-body-style */
 /* eslint-disable eqeqeq */
 /* eslint-disable no-else-return */
@@ -571,8 +573,25 @@ function distinct(arr) {
  *    "Poland" => ["Lodz"]
  *   }
  */
-function group(/* array, keySelector, valueSelector */) {
-  throw new Error('Not implemented');
+
+function group(array, keySelector, valueSelector) {
+  return array.reduce((map, curr) => {
+    if (map.has(keySelector(curr))) {
+      const newValue = Array(map.get(keySelector(curr)));
+
+      if (typeof newValue[0] == 'object') {
+        const a = newValue[0];
+        a.push(valueSelector(curr));
+        map.set(keySelector(curr), a);
+      } else {
+        newValue.push(valueSelector(curr));
+        map.set(keySelector(curr), newValue);
+      }
+    } else {
+      map.set(keySelector(curr), [valueSelector(curr)]);
+    }
+    return map;
+  }, new Map());
 }
 
 /**
@@ -588,8 +607,10 @@ function group(/* array, keySelector, valueSelector */) {
  *   [[1, 2], [3, 4], [5, 6]], (x) => x     =>   [ 1, 2, 3, 4, 5, 6 ]
  *   ['one','two','three'], (x) => x.split('')  =>   ['o','n','e','t','w','o','t','h','r','e','e']
  */
-function selectMany(/* arr, childrenSelector */) {
-  throw new Error('Not implemented');
+function selectMany(arr, childrenSelector) {
+  return arr.reduce((acc, curr) => {
+    return acc.concat(childrenSelector(curr));
+  }, []);
 }
 
 /**
