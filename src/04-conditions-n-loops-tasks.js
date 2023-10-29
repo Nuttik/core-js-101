@@ -493,8 +493,34 @@ function getCommonDirectoryPath(pathes) {
  *                         [ 6 ]]
  *
  */
-function getMatrixProduct(/* m1, m2 */) {
-  throw new Error('Not implemented');
+function getMatrixProduct(m1, m2) {
+  /*
+  Вход: матрицы A и B
+  Пусть C будет новой матрицей нужного размера
+  Для i от 1 до n:
+    Для j от 1 до p:
+      Положим sum =0
+      Для k от 1 до m:
+        Положим sum= sum + A(ik)*B(kj)
+
+      Положим C(ij) = sum
+  Возвращаем C
+  */
+
+  const result = new Array(m1.length);
+
+  for (let i = 0; i < m1.length; i++) {
+    result[i] = new Array(m2[0].length);
+
+    for (let j = 0; j < m2[0].length; j++) {
+      result[i][j] = 0;
+      for (let k = 0; k < m1[0].length; k++) {
+        result[i][j] += m1[i][k] * m2[k][j];
+      }
+    }
+  }
+
+  return result;
 }
 
 /**
